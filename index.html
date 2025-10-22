@@ -1,20 +1,91 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-
-    <link rel="stylesheet" href="styles/main.css">
-</head>
-<body>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Escape Nextbot</title>
+    <link rel="stylesheet" href="styles/main.css" />
+    <link rel="shortcut icon" href="assets/Favicon.jpeg" type="image/x-icon">
+  </head>
+  <body>
     <h1>Escape Nextbot</h1>
+    <div id="score-board">Puntaje: <span id="score">0</span></div>
+
+    <button id="pause-btn">
+      <img src="assets/PauseIcon.png" alt="Pausar" id="pause-icon" />
+    </button>
 
     <div id="game-area">
-        <div id="player" class="character"></div>
-        <div id="bot" class="character"></div>
+      <div id="player" class="character"></div>
+      <div id="bot" class="character"></div>
+      <div id="coins"></div>
+    </div>
+
+    <!-- Modal de Pausa -->
+    <div id="pause-modal">
+      <div class="modal-content">
+        <h2>Configuración</h2>
+
+        <div class="config-group">
+          <label>Dificultad:</label>
+          <div class="difficulty-buttons">
+            <button class="difficulty-btn active" data-difficulty="easy">
+              Fácil
+            </button>
+            <button class="difficulty-btn" data-difficulty="medium">
+              Medio
+            </button>
+            <button class="difficulty-btn" data-difficulty="hard">
+              Difícil
+            </button>
+          </div>
+          <div class="difficulty-info">
+            <p id="difficulty-description"></p>
+          </div>
+        </div>
+
+        <div class="config-group">
+          <label>Imagen del Jugador:</label>
+          <input type="file" id="player-img" accept="image/*" />
+          <input
+            type="text"
+            id="player-img-url"
+            placeholder="O ingresa URL de imagen"
+          />
+        </div>
+
+        <div class="config-group">
+          <label>Imagen del Enemigo:</label>
+          <input type="file" id="bot-img" accept="image/*" />
+          <input
+            type="text"
+            id="bot-img-url"
+            placeholder="O ingresa URL de imagen"
+          />
+        </div>
+        <button id="resume-btn">Reanudar Juego</button>
+      </div>
+    </div>
+
+    <!-- Modal de Game Over -->
+    <div id="gameover-modal">
+      <div class="gameover-content">
+        <h2 id="gameover-title">Juego Terminado</h2>
+        <div class="gameover-stats">
+          <p class="score-display">Puntaje: <span id="final-score">0</span></p>
+          <div id="record-notification" class="hidden">
+            <p class="new-record-text">¡NUEVO RÉCORD!</p>
+            <p class="record-info">
+              Récord anterior: <span id="old-record">0</span><br>
+              Nuevo récord: <span id="new-record">0</span>
+            </p>
+          </div>
+          <p class="record-display">Récord actual: <span id="current-record">0</span></p>
+        </div>
+        <button id="continue-btn">Continuar</button>
+      </div>
     </div>
 
     <script src="js/main.js"></script>
-</body>
+  </body>
 </html>
