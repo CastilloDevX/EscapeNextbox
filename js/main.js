@@ -23,8 +23,8 @@ const COIN_LIFETIME = 4000;
 
 const difficulties = {
   easy: { player: 180, bot: 90, points: 1 },
-  medium: { player: 280, bot: 200, points: 2 },
-  hard: { player: 250, bot: 200, points: 4 }
+  medium: { player: 280, bot: 180, points: 2 },
+  hard: { player: 350, bot: 300, points: 4 }
 };
 
 let currentDifficulty = "easy";
@@ -312,6 +312,13 @@ continueBtn.addEventListener("click", () => {
 });
 
 function togglePause() {
+  if (isGameOverVisible) {
+    isGameOverVisible = false;
+    gameoverModal.classList.remove("active");
+    resetGame();
+    return;
+  }
+
   isPaused = !isPaused;
   
   if (isPaused) {
