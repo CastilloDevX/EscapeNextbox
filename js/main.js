@@ -49,9 +49,13 @@ function saveHighScore(difficulty, score) {
   localStorage.setItem(`highscore_${difficulty}`, score);
 }
 
+/*
+Testing Record code
+
 saveHighScore("easy", 0);
 saveHighScore("normal", 0);
 saveHighScore("easy", 0);
+*/
 
 difficultyBtns.forEach(btn => {
   btn.addEventListener("click", () => {
