@@ -120,8 +120,8 @@ const controlKeys = new Set([
 
 window.addEventListener("keydown", (e) => {
   const k = e.key.toLowerCase();
-  
-  if (e.key === "Enter" || e.key === "Escape") {
+  console.log(e.key)
+  if (e.key === "Enter" || e.key === "Escape"|| e.key === " ") {
     e.preventDefault();
     togglePause();
     return;
