@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Escape Nextbot</title>
     <link rel="stylesheet" href="styles/main.css" />
-    <link rel="shortcut icon" href="assets/Favicon.jpeg" type="image/x-icon">
+    <link rel="shortcut icon" href="assets/Favicon.jpeg" type="image/x-icon" />
   </head>
   <body>
     <h1>Escape Nextbot</h1>
@@ -70,17 +70,17 @@
     <!-- Modal de Game Over -->
     <div id="gameover-modal">
       <div class="gameover-content">
+
         <h2 id="gameover-title">Juego Terminado</h2>
+        
         <div class="gameover-stats">
-          <p class="score-display">Puntaje: <span id="final-score">0</span></p>
-          <div id="record-notification" class="hidden">
-            <p class="new-record-text">¡NUEVO RÉCORD!</p>
-            <p class="record-info">
-              Récord anterior: <span id="old-record">0</span><br>
-              Nuevo récord: <span id="new-record">0</span>
-            </p>
-          </div>
-          <p class="record-display">Récord actual: <span id="current-record">0</span></p>
+          <p id="score-display">
+            Puntaje: <span id="final-score">0</span>
+          </p>
+
+          <p id="record-display">
+            Récord actual: <span id="current-record">0</span>
+          </p>
         </div>
         <button id="continue-btn">Continuar</button>
       </div>

@@ -347,7 +347,7 @@ h1 {
   font-size: 2.2rem;
 }
 
-#record-notification {
+.record-notification {
   background-color: #1a1a1a;
   border: 2px solid #00aeff;
   border-radius: 8px;
@@ -359,7 +359,7 @@ h1 {
 .new-record-text {
   font-size: 1.8rem;
   font-weight: bold;
-  color: #00aeff;
+  color: #00aeff !important;
   text-transform: uppercase;
   margin-bottom: 15px;
   animation: recordPulse 1.5s ease-in-out infinite;

@@ -35,8 +35,10 @@ let botPosition = { x: 450, y: 450 };
 let score = 0;
 let gameOver = false;
 let isPaused = false;
+let isGameOverVisible = false;
 
 let coinSound = new Audio("assets/CoinSound.wav");
+const recordSound = new Audio("assets/Record.wav");
 
 function getHighScore(difficulty) {
   const saved = localStorage.getItem(`highscore_${difficulty}`);
@@ -46,6 +48,10 @@ function getHighScore(difficulty) {
 function saveHighScore(difficulty, score) {
   localStorage.setItem(`highscore_${difficulty}`, score);
 }
+
+saveHighScore("easy", 0);
+saveHighScore("normal", 0);
+saveHighScore("easy", 0);
 
 difficultyBtns.forEach(btn => {
   btn.addEventListener("click", () => {
@@ -234,7 +240,8 @@ function checkCollisions() {
 
       if (coinSound) {
         coinSound.currentTime = 0;
-        coinSound.play().catch(err => console.log("Error al reproducir sonido:", err));
+        coinSound.play()
+        .catch(err => console.log("Error al reproducir sonido:", err));
       }
     }
   });
@@ -254,32 +261,40 @@ function checkCollisions() {
 }
 
 function handleGameOver() {
+  if (isGameOverVisible) { return }
+  isGameOverVisible = true;
   gameOver = true;
   
   const highScore = getHighScore(currentDifficulty);
   const isNewRecord = score > highScore;
-  
-  document.getElementById("final-score").textContent = score;
-  
-  const recordNotification = document.getElementById("record-notification");
-  const recordDisplay = document.querySelector(".record-display");
+  console.log(score, highScore, isNewRecord);
+    
+  const gameOverWrapper = document.querySelector("#gameover-modal .gameover-content");
   const gameoverTitle = document.getElementById("gameover-title");
-  
+
+  const scoreDisplay = document.getElementById("score-display");
+  const recordDisplay = document.getElementById("record-display");
+
+  gameOverWrapper.classList.remove("record-notification");
+  gameoverTitle.classList.remove("new-record-text");
+
   if (isNewRecord) {
     saveHighScore(currentDifficulty, score);
+    gameOverWrapper.classList.add("record-notification");
+    gameoverTitle.classList.add("new-record-text");
     
     gameoverTitle.textContent = "¡NUEVO RÉCORD!";
-    recordNotification.classList.remove("hidden");
-    recordDisplay.classList.add("hidden");
-    
-    document.getElementById("old-record").textContent = highScore;
-    document.getElementById("new-record").textContent = score;
+    scoreDisplay.innerHTML = ``;
+    recordDisplay.innerHTML = `Puntuación: ${score}`;
+
+    recordSound.currentTime = 0;
+    recordSound.play()
+    .catch(err => console.log("Error al reproducir sonido:", err));
   } else {
     gameoverTitle.textContent = "Juego Terminado";
-    recordNotification.classList.add("hidden");
-    recordDisplay.classList.remove("hidden");
     
-    document.getElementById("current-record").textContent = highScore;
+    scoreDisplay.innerHTML = `Puntaje: ${score}`;
+    recordDisplay.innerHTML = `Anterior Record: ${highScore}`;
   }
   
   updateDifficultyDescription();
@@ -287,6 +302,7 @@ function handleGameOver() {
 }
 
 continueBtn.addEventListener("click", () => {
+  isGameOverVisible = false;
   gameoverModal.classList.remove("active");
   resetGame();
 });
